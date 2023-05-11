@@ -7,12 +7,14 @@ import { atualizarPessoa } from "../controllers/atualizarPessoa";
 
 const router = Router();
 
+// Transforma as classes em funções.
 const criarPessoa = new criarPessoas();
 const buscarUmaPessoa = new buscarPessoa();
 const buscarPessoas = new buscarTodasPessoas();
 const deletarPessoas = new deletarPessoa();
 const atualizarPessoas = new atualizarPessoa();
 
+// Cria as Rotas.
 router.post("/criarpessoas", criarPessoa.handle)
 router.get("/buscarpessoa", buscarUmaPessoa.handle)
 router.get("/buscarpessoas", buscarPessoas.handle)
