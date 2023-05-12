@@ -1,13 +1,15 @@
 import { Request, Response } from 'express';
 import { prismaClient } from '../database/prismaClient';
+import { NotFoundError, UnprocessableEntityError } from '../helpers/api-erros';
 
-export class atualizarPessoa {
+export class AtualizarPessoa {
     // O "async" serve para dar um retorno por baixo dos panos.
     async handle(req: Request, res: Response) {
         const {id, nome, sobrenome, idade, dataNascimento} = req.body;
 
         // Verifica se o ID foi inserido, se não informa uma mensagem de erro.
-        if(id == undefined){res.status(422).json({message: "Está faltando o ID!"})}
+        if(id == undefined){
+            throw new UnprocessableEntityError("Está faltando o ID!")}
 
         // O "await" aguarda o "handle" finalizar e após isso confere se o ID existe.
         const pessoas = await prismaClient.pessoas.findUnique({
@@ -17,7 +19,8 @@ export class atualizarPessoa {
         });
 
         // Após a conferencia, se o ID não existe, informa uma mensagem de erro.
-        if(!pessoas){res.status(404).json({message: "O ID não foi encontrado!"})}
+        if(!pessoas){
+            throw new NotFoundError("O ID não foi encontrado!")}
 
         // Faz a alteração de algum item do ID correspondente
         const pessoaAtualizada = await prismaClient.pessoas.update({

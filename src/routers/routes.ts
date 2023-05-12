@@ -1,18 +1,19 @@
+import 'express-async-errors'
 import { Router } from "express";
-import { criarPessoas } from "../controllers/criarPessoas";
-import { buscarPessoa } from "../controllers/buscarPessoa";
-import { buscarTodasPessoas } from "../controllers/buscarTodasPessoas"
-import { deletarPessoa } from "../controllers/deletarPessoa";
-import { atualizarPessoa } from "../controllers/atualizarPessoa";
+import { CriarPessoas } from "../controllers/criarPessoas";
+import { BuscarPessoa } from "../controllers/buscarPessoa";
+import { BuscarTodasPessoas } from "../controllers/buscarTodasPessoas"
+import { DeletarPessoa } from "../controllers/deletarPessoa";
+import { AtualizarPessoa } from "../controllers/atualizarPessoa";
 
 const router = Router();
 
 // Transforma as classes em funções.
-const criarPessoa = new criarPessoas();
-const buscarUmaPessoa = new buscarPessoa();
-const buscarPessoas = new buscarTodasPessoas();
-const deletarPessoas = new deletarPessoa();
-const atualizarPessoas = new atualizarPessoa();
+const criarPessoa = new CriarPessoas();
+const buscarUmaPessoa = new BuscarPessoa();
+const buscarPessoas = new BuscarTodasPessoas();
+const deletarPessoas = new DeletarPessoa();
+const atualizarPessoas = new AtualizarPessoa();
 
 // Cria as Rotas.
 router.post("/criarpessoas", criarPessoa.handle)
